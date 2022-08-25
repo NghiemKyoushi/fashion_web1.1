@@ -1,0 +1,11 @@
+.itemContainer{
+    max-width: 99%;
+    margin-top: 5px;
+    margin-left: -4px;
+}
+.filters{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 35px;
+}

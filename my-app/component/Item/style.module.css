@@ -1,0 +1,24 @@
+.featureContainer{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid lightblue;
+  border-radius: 20px;
+  height: 100%;
+  font-family: roboto, sans-serif;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+}
+.img{
+    max-height: 95%;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+}
+.nameItem{
+    margin-bottom: 6px;
+    /* line-height: 1.1; */
+    padding-left: 10px;
+    padding-top: 5px;
+}

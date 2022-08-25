@@ -1,152 +1,83 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import StarIcon from '@mui/icons-material/StarBorder';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-import GlobalStyles from '@mui/material/GlobalStyles';
-import Container from '@mui/material/Container';
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+import Carousel from 'react-bootstrap/Carousel';
+import Grid  from '@mui/material/Grid'; 
+import Item from '../Item';
+import style from './style.module.css';
+import {collection, getDocs }  from 'firebase/firestore';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import SelectComponent from '../../helpers/SelectComponent';
+interface HomeContentProps {
+  productList?: []
 }
 
-const tiers = [
-  {
-    title: 'Free',
-    price: '0',
-    description: [
-      '10 users included',
-      '2 GB of storage',
-      'Help center access',
-      'Email support',
-    ],
-    buttonText: 'Sign up for free',
-    buttonVariant: 'outlined',
-  },
-  {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-    ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
-  },
-  {
-    title: 'Enterprise',
-    price: '30',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
-    ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
-  },
-];
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: [
-      'Cool stuff',
-      'Random feature',
-      'Team feature',
-      'Developer stuff',
-      'Another one',
-    ],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
+export default function HomeContent(props: HomeContentProps) {
+  
+  const [age, setAge] = React.useState('');
 
-function HomePage() {
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
   return (
     <React.Fragment>
-      <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: 1, borderColor: 'divider' }}
-      >
-        <Toolbar sx={{ flexWrap: 'wrap' }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Fashion1.1
-          </Typography>
-          <nav>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5, color: 'black' }}
-            >
-              Features
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Enterprise
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="#"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Support
-            </Link>
-          </nav>
-          <Button href="/signin" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
-          <Button href="/signup" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Register
-          </Button>
-        </Toolbar>
-      </AppBar>
-      {/* Hero unit */}
-      
+       <Carousel>
+      <Carousel.Item interval={1000}>
+        <img
+          className="d-block w-100"
+          src="http://92wear.vn/storage/banner/92%20%C6%B0.png"
+          alt="First slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item interval={500}>
+        <img
+          className="d-block w-100"
+          src="http://92wear.vn/storage/banner/271752515_4914361671981964_4897833936941014480_n.jpg"
+          alt="Second slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="http://92wear.vn/storage/banner/92.jpg"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+    </Carousel>
+    <div className={style.filters}>
+    {/* <h3>Sản phẩm nổi bật</h3> */}
+    <Grid container spacing={3}>
+    <Grid xs ={6} md={6} lg={6}>
+
+    </Grid>
+    <Grid xs ={2} md={2} lg={2}>
+     <SelectComponent
+     title='Type of product'
+     handleChange={handleChange}
+     />
+      </Grid>
+      <Grid xs ={4} md={4} lg={4}>
+
+      </Grid>
+
+    </Grid>
+    
+    </div>
+    <Grid container className={style.itemContainer} spacing={3}>
+        {props.productList?.map((item, index) => (
+          <Grid item key={index} xs={8} sm={6} md={3} lg={3} >
+            <Item item={item}/>
+          </Grid>
+        ))}
+      </Grid>
     </React.Fragment>
   );
 }
 
-export default function HomeContent() {
-  return <HomePage />;
-}
+// export async function getServerSideProps() {
+//   const productCollectionRef = collection(db , 'products') 
+//   const data1 = await getDocs(productCollectionRef);  
+//   const productList = data1.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+//   console.log(productList)
+//   // Pass data to the page via props
+//   return { props: {productList} }
+// }
+

@@ -1,0 +1,47 @@
+.navContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 0.1;
+}
+.linkDecoration{
+    text-decoration: none !important;
+    color: black;
+}
+.authenText{
+    text-decoration: none !important;
+    color: black;
+    font-family: 'Quicksand',sans-serif;
+}
+.appBar{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 997;
+    background-color: #fff;
+    border-bottom: #e8e8e8 1px solid;
+    font-family: 'Roboto Condensed';
+}
+.formSearch{
+    box-sizing: border-box;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.search{
+    border-radius: 22px;
+    background-color: #fefefe;
+    border: solid 1px #a7a7a7;
+    padding: 8px 0 8px 15px;
+    width: 100%;
+}
+.btnSearch{
+    font-size: 0;
+    border: none;
+    background: url('https://krik.vn/tp/T0298/img/tmp/search.svg');
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 140px;
+    top: 19px;
+}

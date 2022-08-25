@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as app from '../../helpers/firebase/index';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {useAuth} from '../../context/useAuthen';
 function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -31,17 +32,15 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
-  
+  const {register} = useAuth(); 
+
+
   const handleSubmit =  (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
     try{
       if( data.get('email') !== null && data.get('password') !== null){
-        app.createAccount(data.get('email'), data.get('password') );
+        register(data.get('email'), data.get('password') );
       }      
     }catch(e) {
       console.log("error", e);
@@ -120,7 +119,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/signin" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
